@@ -99,7 +99,7 @@ function renderCatalogue() {
             if(selectedItems[index].length !== 0) {
                 selectedToDo[index].update({title : selectedToDo[index].title, done: true});
                 // $(`input[title="${selectedToDo[index].title}"]`).checked = true;
-                // console.log(selectedToDo[index]);
+                console.log(selectedToDo[index]);
             } 
         } 
 
