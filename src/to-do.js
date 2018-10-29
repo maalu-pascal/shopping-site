@@ -1,10 +1,13 @@
+import { list } from './data.js';
+import { loadPage, router } from '../index.js'
+
 class Model {
     constructor(title = '', done = false) {
         this.done = done;
         this.title = title;
-        this.ts = Date.now();                
+        this.ts = Date.now();
         this.id = `id-${this.ts}`;
-        
+
     }
 
     update({
@@ -28,31 +31,34 @@ class Collection {
 
 const createTodo = (todo) => {
     return _.template(`<div>
-        <input type="checkbox" id="<%= id %>" name="<%= title %>" />
+        <input type="checkbox" id="<%= id %>" name="<%= title %>"disabled/>
         <label for="<%= id %>"><%= title %></label>
     </div>`)(todo);
 }
 
-const createTodoPage = (todos) => {
-    const $root = $('#to-do-list');
-    const $page = $('<div />');
-    // const $ul = createTodos(todos);
+const createTodos = (todo) => {
     const $ul = $('<ul />');
-
+    
     $ul.append(
-        todos['data'].map((todo) => createTodo(todo))
+        todo['data'].map((todo) => createTodo(todo))
     );
+
+    return $ul;
+}
+const createTodoPage = (todos) => {
+    const root = document.getElementById('to-do-list');
+    const $page = $('<div />');
+    const $ul = createTodos(todos);
+
     const onChange = function () {
-        const matched = todos['data'].find( (model) => {if(model.title === this.name) return model;});
+        const matched = todos['data'].find((model) => { if (model.title === this.name) return model; });
         if (matched) {
             matched.done = !matched.done;
         }
     }
     $page.append($ul);
     $ul.on('change', 'input', onChange);
-    document.getElementById('to-do-list').append($page[0]);
-    // $root.append($page[0]);
-    // console.log($root);
+    root.append($page[0]);
 
     return {
         onDistroy: () => {
@@ -60,5 +66,20 @@ const createTodoPage = (todos) => {
         }
     }
 }
+let selectedToDo = '';
+const renderTodoPage = () => {
 
-export {Collection, createTodoPage};
+    const collection = new Collection(Object.keys(list));
+    const ulitem1 = createTodoPage(collection);
+
+    const submitToDo = () => {
+        selectedToDo = collection['data'];
+        
+        
+        window.history.pushState('catalogue', '', '#catalogue');
+        router();
+    };
+    $('#submit-to-do').on('click', submitToDo);
+}
+
+export { renderTodoPage, selectedToDo, Collection, createTodoPage };
