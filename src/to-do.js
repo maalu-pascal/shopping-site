@@ -50,7 +50,9 @@ const createTodoPage = (todos) => {
     }
     $page.append($ul);
     $ul.on('change', 'input', onChange);
-    $root.append($page[0]);
+    document.getElementById('to-do-list').append($page[0]);
+    // $root.append($page[0]);
+    // console.log($root);
 
     return {
         onDistroy: () => {
