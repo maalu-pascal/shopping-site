@@ -3,7 +3,7 @@ import { list } from './data.js';
 
 import { renderTodoPage, selectedToDo } from './to-do.js';
 
-class CatalogueModel {
+class CatalogModel {
     constructor(title = '', done = false, quantity = '0') {
         this.done = done;
         this.title = title;
@@ -18,20 +18,20 @@ class CatalogueModel {
     }
 }
 
-class Catalogue {
+class Catalog {
     constructor(data) {
         if (_.isArray(data)) {
-            this.data = data.map(item => new CatalogueModel(item));
+            this.data = data.map(item => new CatalogModel(item));
         } else {
-            this.data = new CatalogueModel(data);
+            this.data = new CatalogModel(data);
         }
     }
 }
 
 const createCatalogItems = (todo) => {
     return _.template(`<div>
-            <label for="<%= id %>"><%= title %></label>
-            <input type="input" id="<%= id %>" name="<%= title %>" class="catalogue-input" placeholder="Enter Quantity" value= "0" />
+            <label for="<%= title %>"><%= title %></label>
+            <input type="input" id="<%= title %>" name="<%= title %>" class="catalog-input" placeholder="Enter Quantity" value= "0" />
         </div>`)(todo);
 }
 
@@ -39,20 +39,20 @@ const createCatalog = (todo) => {
     const $ul = $('<ul />');
 
     $ul.append(
-        todo['data'].map((todo) => createCatalogItems(todo))
+        todo.map((todo) => createCatalogItems(todo))
     );
 
     return $ul;
 }
 
-const createCataloguePage = (todos) => {
-    const $root = $('#catalogue');
+const createCatalogPage = (todos) => {
+    const $root = $('#catalog');
     const $page = $('<div />');
     const $ul = createCatalog(todos);
 
     const onChange = function () {
-        const matched = todos['data'].find((catalogueModel) => {
-            if (catalogueModel.title === this.name) return catalogueModel;
+        const matched = todos.find((catalogModel) => {
+            if (catalogModel.title === this.name) return catalogModel;
         });
 
         if (matched) {
@@ -67,22 +67,37 @@ const createCataloguePage = (todos) => {
     return {
         onDistroy: () => {
             $ul.off('change');
+            $('#root').html("");
+            console.log("destroy");
+            
         }
     }
 }
 
 let selectedItems;
-function renderCatalogue() {
+function renderCatalog(todos) {
     let items = [];
-
-    Object.keys(list).forEach(element => {
-        $('#catalogue').append(`<label><b>${element}</b></label>`);
-        const catalogue = new Catalogue(Object.keys(list[element]));
-        items.push(catalogue['data']);
-        const ulitem2 = createCataloguePage(catalogue);
+    console.log(list);
+    console.log(Object.entries(list));
+    
+    let c = Object.keys(list).filter((item) => {
+        console.log(item);
+        if(todos.f)
+        return item;
     });
 
-    const submitCatalogue = () => {
+
+    Object.entries(list).forEach(element => {
+        // $('#catalog').append(`<label><b>${element}</b></label>`);
+        // const catalog = new Catalog(Object.keys(list[element]));
+        // items.push(catalog);
+        console.log(element);
+
+        // const ulitem2 = createCatalogPage(catalog);
+        const ulitem2 = createCatalogPage(element);
+    });
+
+    const submitCatalog = () => {
         selectedItems = items.map((category) => {
             return category.filter((model) => {
                 if (model.quantity > 0) return model;
@@ -91,28 +106,27 @@ function renderCatalogue() {
         console.log(selectedItems);
         console.log(selectedToDo);
 
-        for( let index in selectedItems)
-        {
+        for (let index in selectedItems) {
             console.log(index);
             // console.log(selectedItems[index].length);
-            
-            if(selectedItems[index].length !== 0) {
-                selectedToDo[index].update({title : selectedToDo[index].title, done: true});
+
+            if (selectedItems[index].length !== 0) {
+                selectedToDo[index].update({ title: selectedToDo[index].title, done: true });
                 // $(`input[title="${selectedToDo[index].title}"]`).checked = true;
                 console.log(selectedToDo[index]);
-            } 
-        } 
+            }
+        }
 
         window.history.pushState('cart', '', '#cart');
         router();
     };
-    $('#submit-catalogue').on('click', submitCatalogue);
+    $('#submit-catalog').on('click', submitCatalog);
 
 }
 
 export {
-    Catalogue,
-    createCataloguePage,
-    renderCatalogue,
+    Catalog,
+    createCatalogPage,
+    renderCatalog,
     selectedItems
 };

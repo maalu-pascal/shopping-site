@@ -1,42 +1,43 @@
-import { list } from './src/data.js';
-import { renderTodoPage, selectedToDo } from './src/to-do.js';
-import { renderCatalogue } from './src/catalogue.js';
-// import { Catalogue, createCataloguePage } from './src/catalogue.js';
-import { renderCart } from './src/cart.js' ;
+import { list, todos } from './src/data.js';
+import { createTodoPage } from './src/to-do.js';
+import { createCatalogPage } from './src/catalog.js';
+import {  createCartPage } from './src/cart.js';
 
 
 window.onload = function () {
-    window.history.pushState('to-do', '', '#to-do');
-
+    //     window.history.pushState({}, 'to-do', '#to-do');
+    router();
 };
-
-
 
 //Load the main body content.
 function loadPage(page) {
     let req = new XMLHttpRequest();
     req.open("GET", `./src/${page}.html`, false);
     req.send();
-    document.getElementById('main-content').innerHTML = req.responseText;
+    document.getElementById('root').innerHTML = req.responseText;
 }
+let ref = null;
 
-function router() {
+const router = () => {
     const route = (location.hash).substring(1);
 
-    if (route === 'to-do') {
-        loadPage('to-do');
-        renderTodoPage();
+    if (ref) {
+        ref.onDistroy();
+    }
+    if (route == '') {
+        window.history.pushState({}, 'to-do', '#to-do');
+        router();
 
-    } else if (route === 'catalogue') {
-        console.log('checked');
-        loadPage('catalogue');
-        renderCatalogue();
-        
+    } else if (route === 'to-do') {
+        ref = createTodoPage(todos);
+        $('#submit-to-do').on('click', onCatalogButtonClick);
 
+    } else if (route === 'catalog') {
+        ref = createCatalogPage(list);
+        $('#submit-catalog').on('click', onCartButtonClick);
 
     } else if (route === 'cart') {
-        loadPage('cart');
-        renderCart();
+        ref = createCartPage(list);
 
     } else if (route === 'checkout') {
         createBillPage();
@@ -45,6 +46,19 @@ function router() {
     }
 }
 
+const onToDoButtonClick = () => {
+    window.history.pushState({}, 'Todo', '#to-do');
+    router();
+};
+const onCatalogButtonClick = () => {
+    window.history.pushState({}, 'Catalog', '#catalog');
+    router();
+};
+const onCartButtonClick = () => {
+    window.history.pushState({}, 'Cart', '#cart');
+    router();
+};
 window.addEventListener("hashchange", router(), false);
+window.onhashchange = router;
 
-export { loadPage, router };
+export { loadPage, router, onToDoButtonClick };

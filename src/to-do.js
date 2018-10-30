@@ -1,5 +1,5 @@
-import { list } from './data.js';
-import { loadPage, router } from '../index.js'
+import { list, todos } from './data.js';
+// import { loadPage, router } from '../index.js'
 
 class Model {
     constructor(title = '', done = false) {
@@ -32,66 +32,54 @@ class Collection {
 const createTodo = (todo) => {
     const checked = (todo.done === true) ? 'checked' : '';
     const labelTxt = (todo.done === true) ? '<s><%= title %></s>' : '<%= title %>';
-    console.log(todo.done);
-    
-
+  
     return _.template(`<li class="list-group-item">
         <div class="form-group form-check">
-            <input type="checkbox" id="<%= id %>" ${checked} class="form-check-input">
+            <input type="checkbox" id="<%= id %>" name="<%= title %>" ${checked} class="form-check-input">
             <label class="form-check-label" for="<%= id %>">${labelTxt}</label>
         </div>
     </li>`)(todo);
-
-    // return _.template(`<div>
-    //     <input type="checkbox" id="<%= id %>" name="<%= title %>"disabled/>
-    //     <label for="<%= id %>"><%= title %></label>
-    // </div>`)(todo);
 }
 
 const createTodos = (todo) => {
     const $ul = $('<ul />');
 
     $ul.append(
-        todo['data'].map((todo) => createTodo(todo))
+        todo.map((todo) => createTodo(todo))
     );
 
     return $ul;
 }
 const createTodoPage = (todos) => {
-    const root = document.getElementById('to-do-list');
-    const $page = $('<div />');
+    const $root = $('#root');
+    const $page = $('<div id="to-do-list"/>');
     const $ul = createTodos(todos);
 
     const onChange = function () {
-        const matched = todos['data'].find((model) => { if (model.title === this.name) return model; });
+        const matched = todos.find((model) => { if (model.title === this.name) return model; });
         if (matched) {
             matched.done = !matched.done;
         }
     }
     $page.append($ul);
+    $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-to-do" class=" btn btn-dark">Proceed</button></div>');
     $ul.on('change', 'input', onChange);
-    root.append($page[0]);
+    $root.append(_.template('<h2 class="pl-2"> To Do List </h2>'));
+    $root.append($page[0]);
 
     return {
         onDistroy: () => {
+
             $ul.off('change');
+            $('#root').html("");
+
         }
     }
 }
-let selectedToDo = '';
-const renderTodoPage = () => {
+// const submitToDo = () => {
+//     // selectedToDo = collection['data'];
+//     window.history.pushState({}, 'catalog', '#catalog');
+//     // router();
+// };
 
-    const collection = new Collection(Object.keys(list));
-    const ulitem1 = createTodoPage(collection);
-
-    const submitToDo = () => {
-        selectedToDo = collection['data'];
-
-
-        window.history.pushState('catalogue', '', '#catalogue');
-        router();
-    };
-    $('#submit-to-do').on('click', submitToDo);
-}
-
-export { renderTodoPage, selectedToDo, Collection, createTodoPage };
+export { Collection, createTodoPage};

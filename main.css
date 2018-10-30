@@ -13,23 +13,23 @@ header, footer {
     margin-right: -190px;
 }
 
-main, nav, aside {
+/* main, nav, aside {
     position: relative;
     float: left;
-}
+} */
 
 main {
-    padding: 0 20px;
+    /* padding: 0 20px; */
     width: 100%;
     min-height: 517px;
 }
 
-nav {
+/* nav {
     width: 180px;
     padding: 0 10px;
     right: 240px;
     margin-left: -100%;
-}
+} */
 
 li {
     height: 60px;
@@ -40,11 +40,11 @@ li {
     justify-content: center;
 }
 
-aside {
+/* aside {
     width: 130px;
     padding: 0 10px;
     margin-right: -100%;
-}
+} */
 
 footer {
     clear: both;
@@ -53,10 +53,10 @@ footer {
 button:hover {
     cursor: pointer;
 }
-
+/* 
 * html nav {
     left: 150px;
-}
+} */
 
 #catalogue input {
     margin-left: auto;
