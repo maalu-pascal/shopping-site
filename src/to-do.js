@@ -1,33 +1,5 @@
 import { list, todos } from './data.js';
 
-class Model {
-    constructor(title = '', done = false) {
-        this.done = done;
-        this.title = title;
-        this.ts = Date.now();
-        this.id = `id-${this.ts}`;
-
-    }
-
-    update({
-        title = '',
-        done = false
-    }) {
-        this.done = done;
-        this.title = title;
-    }
-}
-
-class Collection {
-    constructor(data) {
-        if (_.isArray(data)) {
-            this.data = data.map(item => new Model(item));
-        } else {
-            this.data = new Model(data);
-        }
-    }
-}
-
 const createTodo = (todo) => {
     const checked = (todo.done === true) ? 'checked' : '';
     const labelTxt = (todo.done === true) ? '<s><%= title %></s>' : '<%= title %>';
@@ -76,4 +48,4 @@ const createTodoPage = (todos) => {
     }
 }
 
-export { Collection, createTodoPage};
+export { createTodoPage};

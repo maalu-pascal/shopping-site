@@ -32,20 +32,20 @@ const todos = [{
 const list = {
     'Cake': [
         {
-            'title': 'Chocolate',
+            'title': 'Chocolate-cake',
             'price': '550',
-            'discount': '0',
-            'quantity': '0',
+            'discount': '10',
+            'quantity': '1',
             'company': 'company-name'
         },{
-            'title': 'Truffle',
+            'title': 'Truffle-cake',
             'price': '600',
             'discount': '0',
             'quantity': '0',
             'company': 'company-name'
         },
         {
-            'title': 'Blue-berry',
+            'title': 'Blue-berry-cake',
             'price': '600',
             'discount': '0',
             'quantity': '0',
@@ -57,7 +57,7 @@ const list = {
             'title': 'Toffee',
             'price': '2',
             'discount': '0',
-            'quantity': '0',
+            'quantity': '4',
             'company': 'company-name'
         },
         {

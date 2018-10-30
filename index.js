@@ -45,7 +45,7 @@ const router = () => {
 
     } else if (route === 'checkout') {
         console.log("hi");
-        ref = createCheckoutPage(selectedToDos);
+        ref = createCheckoutPage();
         // console.log(selectedToDos(list));
     } else {
         console.log('invalid-page');

@@ -31,12 +31,8 @@ const createCart = (catalogList) => {
                 return catalogItem
             };
         });
-        console.log("matched",matched);
         
         if (matched >= 0) {
-            console.log("list",list[catalogList[0]][matched]);
-            console.log("doc:",document.getElementsByName(this.name)[0]);
-            
             list[catalogList[0]][matched].quantity = document.getElementsByName(this.name)[0].value;
         }
     }

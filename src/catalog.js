@@ -5,7 +5,7 @@ const createCatalogItems = (todo) => {
             <div class=" d-flex justify-content-start">
                 <span class="ml-5 col-3"><b><%= title %></b></span>
                 <div class="d-flex flex-column col-3">
-                    <span class="small">Company : <%= company %>%  </span> 
+                    <span class="small">Company : <%= company %>  </span> 
                     <span class="small">Discount : <%= discount %>%  </span> 
                     <span class="small">Price : <%= price %>/-  </span> 
                 </div>
