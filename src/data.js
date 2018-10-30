@@ -35,18 +35,21 @@ const list = {
             'title': 'Chocolate',
             'price': '550',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },{
             'title': 'Truffle',
             'price': '600',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Blue-berry',
             'price': '600',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
     ],
     'Sweets': [
@@ -54,13 +57,15 @@ const list = {
             'title': 'Toffee',
             'price': '2',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Cadbury',
             'price': '20',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ],
     'Balloons': [
@@ -68,19 +73,22 @@ const list = {
             'title': 'Balloons-small',
             'price': '70',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Balloons-medium',
             'price': '150',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Balloons-large',
             'price': '250',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ],
     'Snow-spray': [
@@ -88,13 +96,15 @@ const list = {
             'title': 'Snow-spray-small',
             'price': '200',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Snow-spray-large',
             'price': '200',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ], 
     'Popper':[
@@ -102,13 +112,15 @@ const list = {
             'title': 'Popper-small',
             'price': '100',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Popper-large',
             'price': '150',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ],
     'Paper-plate':[
@@ -116,19 +128,22 @@ const list = {
             'title': 'Paper-plates-small',
             'price': '100',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Paper-plates-medium',
             'price': '200',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Paper-plates-large',
             'price': '300',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ],
     'Cup': [
@@ -136,13 +151,15 @@ const list = {
             'title': 'Paper-cups',
             'price': '250',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         },
         {
             'title': 'Plastic-cups',
             'price': '100',
             'discount': '0',
-            'quantity': '0'
+            'quantity': '0',
+            'company': 'company-name'
         }
     ]
 }; 

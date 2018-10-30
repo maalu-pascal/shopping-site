@@ -1,5 +1,4 @@
 import { list, todos } from './data.js';
-// import { loadPage, router } from '../index.js'
 
 class Model {
     constructor(title = '', done = false) {
@@ -64,7 +63,7 @@ const createTodoPage = (todos) => {
     $page.append($ul);
     $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-to-do" class=" btn btn-dark">Proceed</button></div>');
     $ul.on('change', 'input', onChange);
-    $root.append(_.template('<h2 class="pl-2"> To Do List </h2>'));
+    $root.append('<div class="mb-3"><span class="h2"><b>To-Do</b> </span></div>');
     $root.append($page[0]);
 
     return {
@@ -76,10 +75,5 @@ const createTodoPage = (todos) => {
         }
     }
 }
-// const submitToDo = () => {
-//     // selectedToDo = collection['data'];
-//     window.history.pushState({}, 'catalog', '#catalog');
-//     // router();
-// };
 
 export { Collection, createTodoPage};

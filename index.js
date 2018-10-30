@@ -2,6 +2,8 @@ import { list, todos } from './src/data.js';
 import { createTodoPage } from './src/to-do.js';
 import { createCatalogPage } from './src/catalog.js';
 import {  createCartPage } from './src/cart.js';
+import { createCheckoutPage } from './src/checkout.js'
+import { selectedToDos } from './src/shared.js';
 
 
 window.onload = function () {
@@ -38,9 +40,13 @@ const router = () => {
 
     } else if (route === 'cart') {
         ref = createCartPage(list);
+        $('#submit-cart').on('click', onCheckoutButtonClick);
+
 
     } else if (route === 'checkout') {
-        createBillPage();
+        console.log("hi");
+        ref = createCheckoutPage(selectedToDos);
+        // console.log(selectedToDos(list));
     } else {
         console.log('invalid-page');
     }
@@ -50,12 +56,19 @@ const onToDoButtonClick = () => {
     window.history.pushState({}, 'Todo', '#to-do');
     router();
 };
+
 const onCatalogButtonClick = () => {
     window.history.pushState({}, 'Catalog', '#catalog');
     router();
 };
+
 const onCartButtonClick = () => {
     window.history.pushState({}, 'Cart', '#cart');
+    router();
+};
+
+const onCheckoutButtonClick = () => {
+    window.history.pushState({}, 'Checkout', '#checkout');
     router();
 };
 window.addEventListener("hashchange", router(), false);
