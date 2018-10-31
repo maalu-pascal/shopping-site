@@ -31,7 +31,7 @@ const createCart = (catalogList) => {
                 return catalogItem
             };
         });
-        
+
         if (matched >= 0) {
             list[catalogList[0]][matched].quantity = document.getElementsByName(this.name)[0].value;
         }
@@ -64,19 +64,54 @@ const createCartPage = (catalogList) => {
         $ul = createCart(Object.values(element));
         $page.append($ul);
     });
-    
+
     $page.append('<div class = "mb-3 d-flex justify-content-end"><button id="submit-cart" class=" btn btn-dark">Checkout</button></div>');
-    $root.append($page[0]);
+    $root.html($page[0]);
 
     return {
         onDistroy: () => {
             $ul.off('change');
             $ul.off('click');
-            $('#root').html("");
         }
     }
 }
+const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
+
+const cartValidation = () => {
+    let selectedItems = selectedToDos(list);
+    // console.log(selectedItems);
+    // console.log(list);
+
+
+    let item = selectedItems.map((item) => {
+        console.log(item);
+        console.log("item: ", item[1]);
+        let totalItemQuantity = item[1].map((i) => { return i['quantity'] });
+        console.log(totalItemQuantity, totalItemQuantity.reduce(reducer));
+
+        let found = todos.map((name) => {
+            console.log(name, name.quantity);
+            if ((name.title == item[0]) && (name.done === true)) {
+                if (name.quantity !== totalItemQuantity) {
+                    alert("The quantity entered does not match the to-do list quantity. Do you want to continue?");
+                    console.log(name.quantity, totalItemQuantity);
+
+                }
+            }
+        });
+        if (found) {
+            return item;
+        }
+    });
+    console.log(item);
+
+    console.log(selectedItems);
+    console.log(todos);
+
+
+};
+
 
 export {
-    createCartPage
+    createCartPage, cartValidation
 };

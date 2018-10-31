@@ -37,12 +37,10 @@ const createCatalogPage = (catalogList) => {
     });
     $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-catalog" class=" btn btn-dark">Proceed To Cart</button></div>');
 
-    $root.append($page[0]);
+    $root.html($page[0]);
 
     return {
-        onDistroy: () => {
-            $('#root').html("");
-        }
+        onDistroy: () => { }
     }
 }
 

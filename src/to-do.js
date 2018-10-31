@@ -32,18 +32,15 @@ const createTodoPage = (todos) => {
             matched.done = !matched.done;
         }
     }
+    $page.append('<div class="mb-3"><span class="h2"><b>To-Do</b> </span></div>');
     $page.append($ul);
     $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-to-do" class=" btn btn-dark">Proceed</button></div>');
     $ul.on('change', 'input', onChange);
-    $root.append('<div class="mb-3"><span class="h2"><b>To-Do</b> </span></div>');
-    $root.append($page[0]);
+    $root.html($page[0]);
 
     return {
         onDistroy: () => {
-
             $ul.off('change');
-            $('#root').html("");
-
         }
     }
 }

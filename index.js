@@ -1,7 +1,7 @@
 import { list, todos } from './src/data.js';
 import { createTodoPage } from './src/to-do.js';
 import { createCatalogPage } from './src/catalog.js';
-import {  createCartPage } from './src/cart.js';
+import {  createCartPage ,cartValidation } from './src/cart.js';
 import { createCheckoutPage } from './src/checkout.js'
 import { selectedToDos } from './src/shared.js';
 
@@ -40,15 +40,15 @@ const router = () => {
 
     } else if (route === 'cart') {
         ref = createCartPage(list);
-        $('#submit-cart').on('click', onCheckoutButtonClick);
-
+        // $('#submit-cart').on('click', onCheckoutButtonClick);
+        $('#submit-cart').on('click', cartValidation);
 
     } else if (route === 'checkout') {
-        console.log("hi");
         ref = createCheckoutPage();
-        // console.log(selectedToDos(list));
     } else {
+        $('#root').html('<span class="h1"># Page Not Found </span> ');
         console.log('invalid-page');
+
     }
 }
 
