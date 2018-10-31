@@ -35,7 +35,7 @@ const createCatalogPage = (catalogList) => {
     Object.entries(catalogList).forEach(element => {
         $page.append(createCatalog(Object.values(element)));
     });
-    $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-catalog" class=" btn btn-dark">Proceed</button></div>');
+    $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-catalog" class=" btn btn-dark">Proceed To Cart</button></div>');
 
     $root.append($page[0]);
 

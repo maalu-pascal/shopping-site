@@ -64,7 +64,7 @@ const createCartPage = (catalogList) => {
         $ul = createCart(Object.values(element));
         $page.append($ul);
     });
-
+    
     $page.append('<div class = "mb-3 d-flex justify-content-end"><button id="submit-cart" class=" btn btn-dark">Checkout</button></div>');
     $root.append($page[0]);
 

@@ -6,8 +6,7 @@ import {
 } from './data.js'
 
 const createItem = (item) => {
-    const total = (item.price - (item.price)*(item.discount)/100)*item.quantity;
-    
+
     return _.template(`<li class="list-group-item h-auto">
         <div class=" d-flex justify-content-start">
             <span class="ml-5 col-3"><b><%= title %></b></span>
@@ -17,7 +16,7 @@ const createItem = (item) => {
                 <span class="small">Price : <%= price %>/-  </span> 
                 <span class="small">Quantity : <%= quantity %>/-  </span> 
             </div>
-            <span class="col-3 col align-self-end offset-md-3"><b>= ${total}/-</b></span>
+            <span class="col-3 col align-self-end offset-md-3"><b>= ${total(item)}/-</b></span>
         </div>
     </li>`)(item);
 
@@ -29,8 +28,22 @@ const createItemList = (items) => {
 
     $ul.append(items.map((item) => createItem(item)));
     return $ul;
-    
+
 };
+
+Object.defineProperty(Array.prototype, 'flat', {
+    value: function (depth = 1) {
+        return this.reduce(function (flat, toFlatten) {
+            return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
+        }, []);
+    }
+});
+
+const total = (item) => { return (item.price - (item.price) * (item.discount) / 100) * item.quantity; }
+
+
+const reducer = (accumulator, currentValue) => accumulator + currentValue ;
+
 
 const createCheckoutPage = () => {
     const $root = $('#root');
@@ -38,23 +51,29 @@ const createCheckoutPage = () => {
     const selectedToDo = selectedToDos(list);
 
     const filtered = selectedToDo.flat().flat().filter((items) => {
+
         if (items.quantity > "0") {
             return items;
         }
 
     });
-    console.log(filtered);
-    $root.append('<h2> Checkout </h2>');
     const $ul = createItemList(filtered);
-    console.log($ul);
-    
+
+    $root.append('<h2> Checkout </h2>');
     $page.append($ul);
+    const itemTotal = filtered.map((item) => { return total(item); });
+    const grandTotal = itemTotal.reduce(reducer);
+    
+
     $root.append($page);
+    $root.append(`<div class = "p-2  d-flex justify-content-end" ><span><b> Total = ${grandTotal}</b></span></div>`)    
+
     return {
         onDistroy: () => {
             $('#root').html("");
         }
     }
+
 };
 
 export {
