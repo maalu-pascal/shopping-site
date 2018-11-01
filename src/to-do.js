@@ -1,4 +1,5 @@
 import { list, todos } from './data.js';
+import { onCatalogButtonClick} from '../index.js'
 
 const createTodo = (todo) => {
     const checked = (todo.done === true) ? 'checked' : '';
@@ -37,7 +38,8 @@ const createTodoPage = (todos) => {
     $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-to-do" class=" btn btn-dark">Proceed</button></div>');
     $ul.on('change', 'input', onChange);
     $root.html($page[0]);
-
+    $('#submit-to-do').on('click', onCatalogButtonClick);
+    
     return {
         onDistroy: () => {
             $ul.off('change');

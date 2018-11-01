@@ -1,4 +1,5 @@
 import { list } from './data.js';
+import { onCartButtonClick} from '../index.js';
 
 const createCatalogItems = (todo) => {
     return _.template(`<li class="list-group-item h-auto">
@@ -25,7 +26,6 @@ const createCatalog = (catalogList) => {
 }
 
 const createCatalogPage = (catalogList) => {
-    console.log(catalogList);
     
     const $root = $('#root');
     const $page = $('<div />');
@@ -38,6 +38,7 @@ const createCatalogPage = (catalogList) => {
     $page.append('<div class = "mb-3 d-flex justify-content-center"><button id="submit-catalog" class=" btn btn-dark">Proceed To Cart</button></div>');
 
     $root.html($page[0]);
+    $('#submit-catalog').on('click', onCartButtonClick);
 
     return {
         onDistroy: () => { }

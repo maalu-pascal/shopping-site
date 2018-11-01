@@ -32,16 +32,12 @@ const router = () => {
 
     } else if (route === 'to-do') {
         ref = createTodoPage(todos);
-        $('#submit-to-do').on('click', onCatalogButtonClick);
 
     } else if (route === 'catalog') {
         ref = createCatalogPage(list);
-        $('#submit-catalog').on('click', onCartButtonClick);
 
     } else if (route === 'cart') {
         ref = createCartPage(list);
-        // $('#submit-cart').on('click', onCheckoutButtonClick);
-        $('#submit-cart').on('click', cartValidation);
 
     } else if (route === 'checkout') {
         ref = createCheckoutPage();
@@ -71,7 +67,8 @@ const onCheckoutButtonClick = () => {
     window.history.pushState({}, 'Checkout', '#checkout');
     router();
 };
+
 window.addEventListener("hashchange", router(), false);
 window.onhashchange = router;
 
-export { loadPage, router, onToDoButtonClick };
+export { loadPage, router, onToDoButtonClick, onCatalogButtonClick, onCartButtonClick, onCheckoutButtonClick };

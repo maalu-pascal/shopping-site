@@ -1,6 +1,6 @@
-import { loadPage, router } from '../index.js';
 import { list, todos } from './data.js';
 import { selectedToDos } from './shared.js';
+import { onCheckoutButtonClick } from '../index.js'
 
 const createCartItems = (todo) => {
     return _.template(`<li class="list-group-item">
@@ -8,7 +8,7 @@ const createCartItems = (todo) => {
                 <span class="ml-5 col-3"><b><%= title %></b></span>
                 <div class="col-5">
                     <label for="<%= title %>" > Quantity </label>
-                    <input type="number" id="<%= title %>" name="<%= title %>" class="cart-input" placeholder="Enter Quantity" value= "<%= quantity %>" />
+                    <input type="number" id="<%= title %>" name="<%= title %>" class="cart-input" placeholder="Enter Quantity" value= "<%= quantity %>" min="0" />
                 </div>
                 </div>
         </li>`)(todo);
@@ -68,6 +68,8 @@ const createCartPage = (catalogList) => {
     $page.append('<div class = "mb-3 d-flex justify-content-end"><button id="submit-cart" class=" btn btn-dark">Checkout</button></div>');
     $root.html($page[0]);
 
+    $('#submit-cart').on('click', onCheckoutButtonClick);
+    // $('#submit-cart').on('click', cartValidation);
     return {
         onDistroy: () => {
             $ul.off('change');
@@ -75,6 +77,10 @@ const createCartPage = (catalogList) => {
         }
     }
 }
+
+
+
+// for Validation
 const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
 
 const cartValidation = () => {
@@ -84,18 +90,19 @@ const cartValidation = () => {
 
 
     let item = selectedItems.map((item) => {
-        console.log(item);
-        console.log("item: ", item[1]);
         let totalItemQuantity = item[1].map((i) => { return i['quantity'] });
         console.log(totalItemQuantity, totalItemQuantity.reduce(reducer));
 
         let found = todos.map((name) => {
-            console.log(name, name.quantity);
+            // console.log(name, name.quantity);
             if ((name.title == item[0]) && (name.done === true)) {
                 if (name.quantity !== totalItemQuantity) {
-                    alert("The quantity entered does not match the to-do list quantity. Do you want to continue?");
-                    console.log(name.quantity, totalItemQuantity);
+                    let confirmed = confirm(`The quantity entered for ${name.title} does not match the to-do list quantity. Do you want to continue?`);
+                    if (!confirmed) {
+                        console.log(!confirmed);
 
+                    }
+                    console.log(name.quantity, totalItemQuantity);
                 }
             }
         });

@@ -92,7 +92,7 @@ const list = {
         {
             'title': 'Balloons-medium',
             'price': '150',
-            'discount': '0',
+            'discount': '10',
             'quantity': '0',
             'stock': '5',
             'company': 'company-name6'
